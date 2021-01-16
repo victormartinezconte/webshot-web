@@ -8,8 +8,12 @@
  
 </head>
 <body>
+    <script>
+        function sendJob() {
+                alert("sending");
+        }
+    </script>
 <form>
-
   <div class="form-group">
     <label for="url">Password</label>
     <input type="text" class="form-control" id="url" placeholder="Url to capture">
@@ -25,7 +29,7 @@
     <div class="alert alert-success" role="alert">
       A simple success alert—check it out!
     </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button id="sendButton" type="button" class="btn btn-primary" onclick="sendJob();">Submit</button>
 </form>
 
     

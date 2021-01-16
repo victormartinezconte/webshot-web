@@ -9,22 +9,54 @@
 </head>
 <body>
     <script>
+        
+        function handleErrors(response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response;
+        }
+        
         function sendJob() {
-            alert("sending");
-            $('#successMessage').show();
+            var tunnelUrl = $("tunnel")
+            var apiUrl = tunnelUrl+"/api/time"
+           alert(apiUrl);
+            
+              fetch(apiUrl)
+                .then(handleErrors)
+                .then(response => $('#successMessage').show(); )
+                .catch(error => { console.log(error); $('#errorMessage').show(); } );
+}
+            
+// POST            
+//             const userAction = async () => {
+//               const response = await fetch(apiUrl, {
+//                 method: 'POST',
+//                 body: myBody, // string or object
+//                 headers: {
+//                   'Content-Type': 'application/json'
+//                 }
+//               });
+//               const myJson = await response.json(); //extract JSON from the http response
+//               // do something with myJson
+//             }
         }
     </script>
 <div class="container">
     v0.1
 <form>
   <div class="form-group">
-    <label for="url">URL</label>
+    <label for="url">URL address</label>
     <input type="text" class="form-control" id="url" placeholder="Url to capture">
   </div>
-      <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="emaul" aria-describedby="emailHelp" placeholder="Email">
+  <div class="form-group">
+    <label for="email">Your email address</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
     <small id="emailHelp" class="form-text text-muted">We'll never grab or share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="tunnel">Tunnel URL</label>
+    <input type="text" class="form-control" id="tunnel" placeholder="Tunnel Url">
   </div>
     <div id="errorMessage" class="alert alert-danger collapse" role="alert">
       A simple danger alert—check it out!

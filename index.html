@@ -23,6 +23,11 @@
             return response;
         }
         
+        function handleRemoteErrors(response) {
+            if (response.result == "OK") return response.message;
+            else throw Error(response.message);
+        }
+        
         function setError(msg) {
              $('#successMessage').hide();
              $('#errorMessage').text(msg);
@@ -41,10 +46,11 @@
            alert(apiUrl);
             
                fetch(apiUrl)
-                 .then(handleErrors)
+                 .then( handleErrors )
                  .then( response => response.json() )
-                 .then( body => { console.log(body); 
-                                  setSuccess(body.message);} )
+                 .then( body => { console.log(body);
+                                  var message = handleRemoteErrors( body );
+                                  setSuccess( message ); } )
                  .catch( error => { console.log(error); setError(error); } );
         }
         
@@ -83,7 +89,7 @@
         
     </script>
 <div class="container">
-    v0.5.5
+    v0.5.6
 <form>
   <div class="form-group">
     <label for="url">URL address</label>

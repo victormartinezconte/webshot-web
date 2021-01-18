@@ -43,15 +43,14 @@
         function getTime(service) {
            var tunnelUrl = $('#tunnel').val();
            var apiUrl = tunnelUrl+service;
-           alert(apiUrl);
             
-               fetch(apiUrl)
-                 .then( handleErrors )
-                 .then( response => response.json() )
-                 .then( body => { console.log(body);
-                                  var message = handleRemoteErrors( body );
-                                  setSuccess( message ); } )
-                 .catch( error => { console.log(error); setError(error); } );
+           fetch(apiUrl)
+             .then( handleErrors )
+             .then( response => response.json() )
+             .then( body => { console.log(body);
+                              var message = handleRemoteErrors( body );
+                              setSuccess( message ); } )
+             .catch( error => { console.log(error); setError(error); } );
         }
         
         function sendJob() {
@@ -59,7 +58,7 @@
            var apiUrl = tunnelUrl+'/api/job';
            var url = $('#url').val();
            var email = $('#email').val();
-           alert(apiUrl + " - " + url + " + " + email);
+           console.log(apiUrl + " - " + url + " + " + email);
             
            var formData = new FormData();
             formData.append('url', url);
@@ -70,8 +69,11 @@
                  body: formData
                })
                  .then(handleErrors)
-                 .then(response => { console.log(response); $('#successMessage').show(); } )
-                 .catch(error => { console.log(error); $('#errorMessage').show(); } );
+                 .then( response => response.json() )
+                 .then( body => { console.log(body);
+                                  var message = handleRemoteErrors( body );
+                                  setSuccess( "Yout job has ID '" + message + "'" ); } )
+                 .catch( error => { console.log(error); setError(error); } );
         }
             
 // POST            
@@ -89,7 +91,7 @@
         
     </script>
 <div class="container">
-    v0.5.7
+    v0.6
 <form>
   <div class="form-group">
     <label for="url">URL address</label>

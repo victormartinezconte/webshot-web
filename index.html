@@ -60,20 +60,23 @@
            var email = $('#email').val();
            console.log(apiUrl + " - " + url + " + " + email);
             
-           var formData = new FormData();
-            formData.append('url', url);
-            formData.append('email', email);
+           var formData = [];
+           formData.push('url' + "=" +  encodeURIComponent(url) );
+           formData.push('email' + "=" +  encodeURIComponent(email) );
 
-               fetch(apiUrl, {
-                 method: 'POST',
-                 body: formData
-               })
-                 .then(handleErrors)
-                 .then( response => response.json() )
-                 .then( body => { console.log(body);
-                                  var message = handleRemoteErrors( body );
-                                  setSuccess( "Yout job has ID '" + message + "'" ); } )
-                 .catch( error => { console.log(error); setError(error); } );
+           fetch(apiUrl, {
+             method: 'POST',
+             body: formData.join("&"),
+             headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+             }
+           })
+             .then(handleErrors)
+             .then( response => response.json() )
+             .then( body => { console.log(body);
+                              var message = handleRemoteErrors( body );
+                              setSuccess( "Yout job has ID '" + message + "'" ); } )
+             .catch( error => { console.log(error); setError(error); } );
         }
             
 // POST            
@@ -91,7 +94,7 @@
         
     </script>
 <div class="container">
-    v0.6
+    v0.6.1
 <form>
   <div class="form-group">
     <label for="url">URL address</label>

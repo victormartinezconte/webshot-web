@@ -40,9 +40,9 @@
              $('#successMessage').show();
         }
         
-        function getTime() {
+        function getTime(service) {
            var tunnelUrl = $('#tunnel').val();
-           var apiUrl = tunnelUrl+'/api/time';
+           var apiUrl = tunnelUrl+service;
            alert(apiUrl);
             
                fetch(apiUrl)
@@ -110,7 +110,8 @@
     <div id="successMessage" class="alert alert-success collapse" role="alert">
       A simple success alert—check it out!
     </div>
-  <button id="getTimeButton" type="button" class="btn btn-primary" onclick="getTime();">Get Time</button>
+  <button id="getTimeButton" type="button" class="btn btn-primary" onclick="getTime('/api/time');">Get time</button>
+  <button id="getTimeButton" type="button" class="btn btn-primary" onclick="getTime('/api/error');">Get error</button>
   <button id="sendJobButton" type="button" class="btn btn-primary" onclick="sendJob();">Send Job</button>
 </form>
 </div>

@@ -42,7 +42,10 @@
             
                fetch(apiUrl)
                  .then(handleErrors)
-                 .then(response => { console.log("response = "+response); console.log("json = "+response.json()); setSuccess(response.json().message); } )
+                 .then(response => { console.log(response); 
+                                     var body = response.json(); 
+                                     console.log(body); 
+                                     setSuccess(response.json().message); } )
                  .catch(error => { console.log(error); setError(error); } );
         }
         
@@ -81,7 +84,7 @@
         
     </script>
 <div class="container">
-    v0.5.3
+    v0.5.4
 <form>
   <div class="form-group">
     <label for="url">URL address</label>

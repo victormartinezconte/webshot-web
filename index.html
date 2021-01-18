@@ -75,26 +75,13 @@
              .then( response => response.json() )
              .then( body => { console.log(body);
                               var message = handleRemoteErrors( body );
-                              setSuccess( "Yout job has ID '" + message + "'" ); } )
+                              setSuccess( "Your job has ID '" + message + "'" ); } )
              .catch( error => { console.log(error); setError(error); } );
         }
-            
-// POST            
-//             const userAction = async () => {
-//               const response = await fetch(apiUrl, {
-//                 method: 'POST',
-//                 body: myBody, // string or object
-//                 headers: {
-//                   'Content-Type': 'application/json'
-//                 }
-//               });
-//               const myJson = await response.json(); //extract JSON from the http response
-//               // do something with myJson
-//             }
         
     </script>
 <div class="container">
-    v0.6.1
+    v0.6.2
 <form>
   <div class="form-group">
     <label for="url">URL address</label>

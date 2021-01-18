@@ -23,15 +23,35 @@
             return response;
         }
         
-        function sendJob() {
-            var tunnelUrl = $('#tunnel').val();
-            var apiUrl = tunnelUrl+'/api/time';
+        funtion getTime() {
+           var tunnelUrl = $('#tunnel').val();
+           var apiUrl = tunnelUrl+'/api/time';
            alert(apiUrl);
             
                fetch(apiUrl)
                  .then(handleErrors)
-                 .then(response => $('#successMessage').show() )
-//                 .catch(error => { console.log(error); $('#errorMessage').show(); } );
+                 .then(response => { console.log(response); $('#successMessage').show(); } )
+                 .catch(error => { console.log(error); $('#errorMessage').show(); } );
+        }
+        
+        function sendJob() {
+           var tunnelUrl = $('#tunnel').val();
+           var apiUrl = tunnelUrl+'/api/job';
+           var url = $('#url').val();
+           var email = $('#email').val();
+           alert(apiUrl + " - " + url + " + " + email);
+            
+           var formData = new FormData();
+            formData.append('url', url);
+            formData.append('email', email);
+
+               fetch(apiUrl, {
+                 method: 'POST',
+                 body: formData, 
+               })
+                 .then(handleErrors)
+                 .then(response => { console.log(response); $('#successMessage').show(); } )
+                 .catch(error => { console.log(error); $('#errorMessage').show(); } );
         }
             
 // POST            
@@ -49,7 +69,7 @@
         
     </script>
 <div class="container">
-    v0.4.6
+    v0.5
 <form>
   <div class="form-group">
     <label for="url">URL address</label>
@@ -70,7 +90,8 @@
     <div id="successMessage" class="alert alert-success collapse" role="alert">
       A simple success alert—check it out!
     </div>
-  <button id="sendButton" type="button" class="btn btn-primary" onclick="sendJob();">Submit</button>
+  <button id="getTimeButton" type="button" class="btn btn-primary" onclick="getTime();">Get Time</button>
+  <button id="sendJobButton" type="button" class="btn btn-primary" onclick="sendJob();">Send Job</button>
 </form>
 </div>
 </body>
